@@ -56,7 +56,7 @@ func main() {
 	for i, timestamp := range timestamps {
 		geo := geoDatas[timestamp]
 		fmt.Println("Downloading", i+1, "of", total)
-		getStreetViewImage(outDir, fmt.Sprintf("%05d", i+1), geo.StreetViewUrl())
+		getStreetViewImage(outDir, fmt.Sprintf("%05d", i+1), getStreetViewUrl(geo))
 	}
 }
 
@@ -85,4 +85,8 @@ func getStreetViewImage(path, name, url string) {
 
 	// Avoid hitting google's rate limit
 	time.Sleep(time.Second)
+}
+
+func getStreetViewUrl(geo geophoto.GeoPhoto) string {
+	return fmt.Sprintf("https://maps.googleapis.com/maps/api/streetview?location=%s&size=640x640&fov=120&heading=0&sensor=false", geo.StringDegrees())
 }
