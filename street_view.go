@@ -43,7 +43,7 @@ func main() {
 		os.Exit(1)
 	}
 
-	geoDatas := geophoto.DirGeoPhotoData(inDir)
+	geoDatas := geophoto.DirGeoPhotoDataUnique(inDir)
 
 	var timestamps []int
 	for timestamp, _ := range geoDatas {
